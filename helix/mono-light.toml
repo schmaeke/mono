@@ -1,0 +1,243 @@
+# Mono Light for Helix
+
+# Code is set in four inks and two styles, never in hue:
+#   ink    keywords (bold), functions, types
+#   text   variables, operators, prose
+#   soft   strings, numbers, constants
+#   muted  punctuation, comments (italic)
+# Italic marks text that is not code: comments, inlay hints, emphasis.
+
+# Syntax ----------------------------------------------------------------------
+
+"attribute" = "soft"
+
+"type" = "ink"
+"type.builtin" = "ink"
+"type.parameter" = "ink"
+"type.enum" = "ink"
+"type.enum.variant" = "ink"
+
+"constructor" = "ink"
+
+"constant" = "soft"
+"constant.builtin" = "soft"
+"constant.builtin.boolean" = "soft"
+"constant.character" = "soft"
+"constant.character.escape" = { fg = "soft", modifiers = ["bold"] }
+"constant.numeric" = "soft"
+"constant.numeric.integer" = "soft"
+"constant.numeric.float" = "soft"
+
+"string" = "soft"
+"string.regexp" = "soft"
+"string.special" = "soft"
+"string.special.path" = "soft"
+"string.special.url" = { fg = "soft", underline = { style = "line" } }
+"string.special.symbol" = "soft"
+
+"comment" = { fg = "muted", modifiers = ["italic"] }
+"comment.line" = { fg = "muted", modifiers = ["italic"] }
+"comment.line.documentation" = { fg = "soft", modifiers = ["italic"] }
+"comment.block" = { fg = "muted", modifiers = ["italic"] }
+"comment.block.documentation" = { fg = "soft", modifiers = ["italic"] }
+"comment.unused" = { fg = "faint", modifiers = ["italic"] }
+
+"variable" = "text"
+"variable.builtin" = "ink"
+"variable.parameter" = "text"
+"variable.other" = "text"
+"variable.other.member" = "text"
+"variable.other.member.private" = "text"
+
+"label" = "soft"
+
+"punctuation" = "muted"
+"punctuation.delimiter" = "muted"
+"punctuation.bracket" = "muted"
+"punctuation.special" = "text"
+
+"keyword" = { fg = "ink", modifiers = ["bold"] }
+"keyword.control" = { fg = "ink", modifiers = ["bold"] }
+"keyword.control.conditional" = { fg = "ink", modifiers = ["bold"] }
+"keyword.control.repeat" = { fg = "ink", modifiers = ["bold"] }
+"keyword.control.import" = { fg = "ink", modifiers = ["bold"] }
+"keyword.control.return" = { fg = "ink", modifiers = ["bold"] }
+"keyword.control.exception" = { fg = "ink", modifiers = ["bold"] }
+"keyword.operator" = { fg = "ink", modifiers = ["bold"] }
+"keyword.directive" = { fg = "ink", modifiers = ["bold"] }
+"keyword.function" = { fg = "ink", modifiers = ["bold"] }
+"keyword.storage" = { fg = "ink", modifiers = ["bold"] }
+"keyword.storage.type" = { fg = "ink", modifiers = ["bold"] }
+"keyword.storage.modifier" = { fg = "ink", modifiers = ["bold"] }
+
+"operator" = "text"
+
+"function" = "ink"
+"function.builtin" = "ink"
+"function.method" = "ink"
+"function.method.private" = "ink"
+"function.macro" = "ink"
+"function.special" = "ink"
+
+"tag" = "ink"
+"tag.builtin" = "ink"
+
+"namespace" = "text"
+"module" = "text"
+
+"special" = { fg = "ink", modifiers = ["bold"] }
+
+# Markup ----------------------------------------------------------------------
+
+"markup.heading" = { fg = "ink", modifiers = ["bold"] }
+"markup.heading.marker" = "muted"
+"markup.heading.1" = { fg = "ink", modifiers = ["bold"] }
+"markup.heading.2" = { fg = "ink", modifiers = ["bold"] }
+"markup.heading.3" = { fg = "text", modifiers = ["bold"] }
+"markup.heading.4" = { fg = "text", modifiers = ["bold"] }
+"markup.heading.5" = { fg = "text", modifiers = ["bold"] }
+"markup.heading.6" = { fg = "text", modifiers = ["bold"] }
+"markup.heading.completion" = { fg = "ink", modifiers = ["bold"] }
+"markup.heading.hover" = { fg = "ink", modifiers = ["bold"] }
+
+"markup.list" = "muted"
+"markup.list.unnumbered" = "muted"
+"markup.list.numbered" = "muted"
+"markup.list.checked" = "muted"
+"markup.list.unchecked" = "text"
+
+"markup.bold" = { fg = "ink", modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.strikethrough" = { modifiers = ["crossed_out"] }
+
+"markup.link" = "text"
+"markup.link.url" = { fg = "muted", underline = { style = "line" } }
+"markup.link.label" = "soft"
+"markup.link.text" = { fg = "text", underline = { style = "line" } }
+
+"markup.quote" = { fg = "soft", modifiers = ["italic"] }
+
+"markup.raw" = "soft"
+"markup.raw.inline" = "soft"
+"markup.raw.block" = "soft"
+"markup.raw.inline.completion" = "soft"
+"markup.raw.inline.hover" = "soft"
+
+"markup.normal" = "text"
+"markup.normal.completion" = "text"
+"markup.normal.hover" = "text"
+
+# Diff ------------------------------------------------------------------------
+
+"diff.plus" = "ink"
+"diff.plus.gutter" = "ink"
+"diff.minus" = "muted"
+"diff.minus.gutter" = "muted"
+"diff.delta" = "soft"
+"diff.delta.gutter" = "soft"
+"diff.delta.moved" = { fg = "soft", modifiers = ["italic"] }
+"diff.delta.conflict" = { fg = "ink", modifiers = ["bold"] }
+
+# Diagnostics -----------------------------------------------------------------
+# Severity reads from the underline style first, then from the gray.
+
+"error" = "ink"
+"warning" = "text"
+"info" = "soft"
+"hint" = "muted"
+
+"diagnostic" = { underline = { color = "muted", style = "dotted" } }
+"diagnostic.error" = { underline = { color = "ink", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "text", style = "dashed" } }
+"diagnostic.info" = { underline = { color = "soft", style = "dotted" } }
+"diagnostic.hint" = { underline = { color = "muted", style = "dotted" } }
+"diagnostic.unnecessary" = { modifiers = ["dim"] }
+"diagnostic.deprecated" = { modifiers = ["crossed_out"] }
+
+# Editor ----------------------------------------------------------------------
+
+"ui.background" = { fg = "text", bg = "paper" }
+"ui.background.separator" = "rule"
+
+"ui.text" = "text"
+"ui.text.focus" = { fg = "ink", bg = "bg3" }
+"ui.text.inactive" = "muted"
+"ui.text.info" = "text"
+"ui.text.directory" = "ink"
+
+"ui.cursor" = { fg = "paper", bg = "soft" }
+"ui.cursor.normal" = { fg = "paper", bg = "soft" }
+"ui.cursor.insert" = { fg = "paper", bg = "soft" }
+"ui.cursor.select" = { fg = "paper", bg = "soft" }
+"ui.cursor.primary" = { fg = "paper", bg = "ink" }
+"ui.cursor.primary.normal" = { fg = "paper", bg = "ink" }
+"ui.cursor.primary.insert" = { fg = "paper", bg = "ink" }
+"ui.cursor.primary.select" = { fg = "paper", bg = "ink" }
+"ui.cursor.match" = { fg = "ink", bg = "bg4", modifiers = ["bold"] }
+
+"ui.cursorline.primary" = { bg = "bg1" }
+"ui.cursorline.secondary" = { bg = "bg1" }
+"ui.cursorcolumn.primary" = { bg = "bg1" }
+"ui.cursorcolumn.secondary" = { bg = "bg1" }
+
+"ui.selection" = { bg = "bg3" }
+"ui.selection.primary" = { bg = "bg4" }
+
+"ui.highlight" = { bg = "bg2" }
+"ui.highlight.frameline" = { bg = "bg3" }
+
+"ui.gutter" = { bg = "paper" }
+"ui.gutter.selected" = { bg = "bg1" }
+"ui.linenr" = "faint"
+"ui.linenr.selected" = "ink"
+
+"ui.virtual.ruler" = { bg = "bg1" }
+"ui.virtual.whitespace" = "bg4"
+"ui.virtual.indent-guide" = "bg3"
+"ui.virtual.wrap" = "faint"
+"ui.virtual.inlay-hint" = { fg = "faint", modifiers = ["italic"] }
+"ui.virtual.inlay-hint.parameter" = { fg = "faint", modifiers = ["italic"] }
+"ui.virtual.inlay-hint.type" = { fg = "faint", modifiers = ["italic"] }
+"ui.virtual.jump-label" = { fg = "paper", bg = "ink", modifiers = ["bold"] }
+
+"ui.statusline" = { fg = "text", bg = "bg1" }
+"ui.statusline.inactive" = { fg = "muted", bg = "bg1" }
+"ui.statusline.normal" = { fg = "ink", bg = "bg4", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "paper", bg = "ink", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "paper", bg = "soft", modifiers = ["bold"] }
+"ui.statusline.separator" = { fg = "rule", bg = "bg1" }
+
+"ui.bufferline" = { fg = "muted", bg = "bg1" }
+"ui.bufferline.active" = { fg = "ink", bg = "paper", modifiers = ["bold"] }
+"ui.bufferline.background" = { bg = "bg1" }
+
+"ui.window" = "rule"
+"ui.help" = { fg = "text", bg = "bg2" }
+"ui.popup" = { fg = "text", bg = "bg2" }
+"ui.popup.info" = { fg = "text", bg = "bg2" }
+
+"ui.menu" = { fg = "text", bg = "bg2" }
+"ui.menu.selected" = { fg = "ink", bg = "bg4" }
+"ui.menu.scroll" = { fg = "faint", bg = "bg2" }
+
+"ui.picker.header" = { fg = "text", modifiers = ["bold"] }
+"ui.picker.header.column" = "muted"
+"ui.picker.header.column.active" = { fg = "ink", modifiers = ["bold"], underline = { style = "line" } }
+
+"ui.debug.breakpoint" = "text"
+"ui.debug.active" = { fg = "ink", modifiers = ["bold"] }
+
+"tabstop" = { bg = "bg2", modifiers = ["italic"] }
+
+[palette]
+paper = "#ffffff"
+bg1 = "#f2f2f2"
+bg2 = "#e8e8e8"
+bg3 = "#d9d9d9"
+bg4 = "#c4c4c4"
+rule = "#acacac"
+faint = "#909090"
+muted = "#686868"
+soft = "#484848"
+text = "#2b2b2b"
+ink = "#000000"
