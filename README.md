@@ -1,7 +1,7 @@
 # Mono
 
-A black-and-white theme for Ghostty, Helix and Claude Code, in a dark and a light variant. It uses no hue at all, only
-eleven grays, bold and italic.
+A black-and-white theme for Ghostty, Helix, Yazi, gitui and Claude Code, in a dark and a light variant. It uses no hue
+at all, only eleven grays, bold and italic.
 
 ## Palette
 
@@ -69,6 +69,39 @@ cp helix/mono-dark.toml helix/mono-light.toml ~/.config/helix/themes/
 ```toml
 theme = "mono-dark"
 ```
+
+**Yazi**
+
+```sh
+cp -R yazi/mono-dark.yazi yazi/mono-light.yazi ~/.config/yazi/flavors/
+```
+
+In `~/.config/yazi/theme.toml`:
+
+```toml
+[flavor]
+dark = "mono-dark"
+light = "mono-light"
+```
+
+Yazi picks the flavor that matches the terminal's background. Icons have no color of their own and take the color of the
+file name: directories in bold `ink`, files in `text`, media and documents in `soft`, archives in `muted`. Code previews
+use the flavor's `tmtheme.xml`, which sets code in the same four inks as the Helix theme.
+
+**gitui**
+
+```sh
+cp -L gitui/* ~/.config/gitui/
+```
+
+```sh
+gitui -t mono-dark.ron
+```
+
+gitui has no light and dark switch. Pass the variant with `-t`, or copy it to `~/.config/gitui/theme.ron` to make it the
+default. Each theme loads the matching `.tmTheme` for code views and silently falls back to a colored syntax theme when it
+is missing. In the repository, the `.tmTheme` files are symlinks to the Yazi `tmtheme.xml` files, so `cp -L` copies the
+files they point to.
 
 **Claude Code**
 
