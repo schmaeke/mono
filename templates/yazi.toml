@@ -1,4 +1,5 @@
-# Mono Light for Yazi
+# {{title}} for Yazi
+# Built with: {{command}}
 #
 # Names are set in two inks: directories in ink (bold), files in text.
 # Media and documents are soft, archives muted. Icons carry no color of
@@ -7,28 +8,28 @@
 # : Manager {{{
 
 [mgr]
-cwd = { fg = "#2b2b2b", bold = true }
+cwd = { fg = "{{text}}", bold = true }
 
 # Find
-find_keyword  = { fg = "#000000", bold = true, underline = true }
-find_position = { fg = "#686868", italic = true }
+find_keyword  = { fg = "{{ink}}", bold = true, underline = true }
+find_position = { fg = "{{muted}}", italic = true }
 
 # Symlink
-symlink_target = { fg = "#686868", italic = true }
+symlink_target = { fg = "{{muted}}", italic = true }
 
 # Marker
-marker_copied   = { fg = "#484848", bg = "#484848" }
-marker_cut      = { fg = "#686868", bg = "#686868" }
-marker_marked   = { fg = "#2b2b2b", bg = "#2b2b2b" }
-marker_selected = { fg = "#000000", bg = "#000000" }
+marker_copied   = { fg = "{{soft}}", bg = "{{soft}}" }
+marker_cut      = { fg = "{{muted}}", bg = "{{muted}}" }
+marker_marked   = { fg = "{{text}}", bg = "{{text}}" }
+marker_selected = { fg = "{{ink}}", bg = "{{ink}}" }
 
 # Count
-count_copied   = { fg = "#ffffff", bg = "#484848" }
-count_cut      = { fg = "#ffffff", bg = "#686868" }
-count_selected = { fg = "#ffffff", bg = "#000000" }
+count_copied   = { fg = "{{paper}}", bg = "{{soft}}" }
+count_cut      = { fg = "{{paper}}", bg = "{{muted}}" }
+count_selected = { fg = "{{paper}}", bg = "{{ink}}" }
 
 # Border
-border_style = { fg = "#acacac" }
+border_style = { fg = "{{rule}}" }
 
 # : }}}
 
@@ -36,8 +37,8 @@ border_style = { fg = "#acacac" }
 # : Tabs {{{
 
 [tabs]
-active   = { fg = "#000000", bg = "#c4c4c4", bold = true }
-inactive = { fg = "#686868", bg = "#f2f2f2" }
+active   = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
+inactive = { fg = "{{muted}}", bg = "{{bg1}}" }
 
 # : }}}
 
@@ -45,16 +46,16 @@ inactive = { fg = "#686868", bg = "#f2f2f2" }
 # : Mode {{{
 
 [mode]
-normal_main = { fg = "#000000", bg = "#c4c4c4", bold = true }
-normal_alt  = { fg = "#2b2b2b", bg = "#e8e8e8" }
+normal_main = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
+normal_alt  = { fg = "{{text}}", bg = "{{bg2}}" }
 
 # Select mode
-select_main = { fg = "#ffffff", bg = "#484848", bold = true }
-select_alt  = { fg = "#484848", bg = "#e8e8e8" }
+select_main = { fg = "{{paper}}", bg = "{{soft}}", bold = true }
+select_alt  = { fg = "{{soft}}", bg = "{{bg2}}" }
 
 # Unset mode
-unset_main = { fg = "#ffffff", bg = "#686868", bold = true }
-unset_alt  = { fg = "#686868", bg = "#e8e8e8" }
+unset_main = { fg = "{{paper}}", bg = "{{muted}}", bold = true }
+unset_alt  = { fg = "{{muted}}", bg = "{{bg2}}" }
 
 # : }}}
 
@@ -62,8 +63,8 @@ unset_alt  = { fg = "#686868", bg = "#e8e8e8" }
 # : Indicator of hovered file {{{
 
 [indicator]
-parent  = { fg = "#000000", bg = "#d9d9d9" }
-current = { fg = "#ffffff", bg = "#000000" }
+parent  = { fg = "{{ink}}", bg = "{{bg3}}" }
+current = { fg = "{{paper}}", bg = "{{ink}}" }
 preview = { underline = true }
 
 # : }}}
@@ -73,16 +74,16 @@ preview = { underline = true }
 
 [status]
 # Permissions
-perm_sep   = { fg = "#909090" }
-perm_type  = { fg = "#000000" }
-perm_read  = { fg = "#484848" }
-perm_write = { fg = "#2b2b2b" }
-perm_exec  = { fg = "#000000", bold = true }
+perm_sep   = { fg = "{{faint}}" }
+perm_type  = { fg = "{{ink}}" }
+perm_read  = { fg = "{{soft}}" }
+perm_write = { fg = "{{text}}" }
+perm_exec  = { fg = "{{ink}}", bold = true }
 
 # Progress
-progress_label  = { fg = "#000000", bold = true }
-progress_normal = { fg = "#484848", bg = "#e8e8e8" }
-progress_error  = { fg = "#000000", bg = "#c4c4c4" }
+progress_label  = { fg = "{{ink}}", bold = true }
+progress_normal = { fg = "{{soft}}", bg = "{{bg2}}" }
+progress_error  = { fg = "{{ink}}", bg = "{{bg4}}" }
 
 # : }}}
 
@@ -90,12 +91,12 @@ progress_error  = { fg = "#000000", bg = "#c4c4c4" }
 # : Which {{{
 
 [which]
-border          = { fg = "#acacac" }
-mask            = { bg = "#e8e8e8" }
-cand            = { fg = "#000000", bold = true }
-rest            = { fg = "#686868" }
-desc            = { fg = "#2b2b2b" }
-separator_style = { fg = "#909090" }
+border          = { fg = "{{rule}}" }
+mask            = { bg = "{{bg2}}" }
+cand            = { fg = "{{ink}}", bold = true }
+rest            = { fg = "{{muted}}" }
+desc            = { fg = "{{text}}" }
+separator_style = { fg = "{{faint}}" }
 
 # : }}}
 
@@ -103,12 +104,12 @@ separator_style = { fg = "#909090" }
 # : Confirmation {{{
 
 [confirm]
-border  = { fg = "#acacac" }
-title   = { fg = "#000000", bold = true }
-body    = { fg = "#2b2b2b" }
-list    = { fg = "#484848" }
-btn_yes = { fg = "#ffffff", bg = "#000000", bold = true }
-btn_no  = { fg = "#2b2b2b" }
+border  = { fg = "{{rule}}" }
+title   = { fg = "{{ink}}", bold = true }
+body    = { fg = "{{text}}" }
+list    = { fg = "{{soft}}" }
+btn_yes = { fg = "{{paper}}", bg = "{{ink}}", bold = true }
+btn_no  = { fg = "{{text}}" }
 
 # : }}}
 
@@ -116,12 +117,12 @@ btn_no  = { fg = "#2b2b2b" }
 # : Spotter {{{
 
 [spot]
-border = { fg = "#acacac" }
-title  = { fg = "#000000", bold = true }
+border = { fg = "{{rule}}" }
+title  = { fg = "{{ink}}", bold = true }
 
 # Table
-tbl_col  = { fg = "#686868" }
-tbl_cell = { fg = "#000000", bg = "#c4c4c4" }
+tbl_col  = { fg = "{{muted}}" }
+tbl_cell = { fg = "{{ink}}", bg = "{{bg4}}" }
 
 # : }}}
 
@@ -129,9 +130,9 @@ tbl_cell = { fg = "#000000", bg = "#c4c4c4" }
 # : Notification {{{
 
 [notify]
-title_info  = { fg = "#484848" }
-title_warn  = { fg = "#2b2b2b", bold = true }
-title_error = { fg = "#000000", bold = true }
+title_info  = { fg = "{{soft}}" }
+title_warn  = { fg = "{{text}}", bold = true }
+title_error = { fg = "{{ink}}", bold = true }
 
 # : }}}
 
@@ -139,9 +140,9 @@ title_error = { fg = "#000000", bold = true }
 # : Picker {{{
 
 [pick]
-border   = { fg = "#acacac" }
-active   = { fg = "#000000", bg = "#c4c4c4", bold = true }
-inactive = { fg = "#2b2b2b" }
+border   = { fg = "{{rule}}" }
+active   = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
+inactive = { fg = "{{text}}" }
 
 # : }}}
 
@@ -149,10 +150,10 @@ inactive = { fg = "#2b2b2b" }
 # : Input {{{
 
 [input]
-border   = { fg = "#acacac" }
-title    = { fg = "#000000", bold = true }
-value    = { fg = "#2b2b2b" }
-selected = { bg = "#c4c4c4" }
+border   = { fg = "{{rule}}" }
+title    = { fg = "{{ink}}", bold = true }
+value    = { fg = "{{text}}" }
+selected = { bg = "{{bg4}}" }
 
 # : }}}
 
@@ -160,9 +161,9 @@ selected = { bg = "#c4c4c4" }
 # : Completion {{{
 
 [cmp]
-border   = { fg = "#acacac" }
-active   = { fg = "#000000", bg = "#c4c4c4" }
-inactive = { fg = "#2b2b2b" }
+border   = { fg = "{{rule}}" }
+active   = { fg = "{{ink}}", bg = "{{bg4}}" }
+inactive = { fg = "{{text}}" }
 
 # : }}}
 
@@ -170,9 +171,9 @@ inactive = { fg = "#2b2b2b" }
 # : Task manager {{{
 
 [tasks]
-border  = { fg = "#acacac" }
-title   = { fg = "#000000", bold = true }
-hovered = { fg = "#000000", bg = "#c4c4c4" }
+border  = { fg = "{{rule}}" }
+title   = { fg = "{{ink}}", bold = true }
+hovered = { fg = "{{ink}}", bg = "{{bg4}}" }
 
 # : }}}
 
@@ -180,10 +181,10 @@ hovered = { fg = "#000000", bg = "#c4c4c4" }
 # : Help menu {{{
 
 [help]
-border  = { fg = "#acacac" }
-chord   = { fg = "#000000", bold = true }
-action  = { fg = "#2b2b2b" }
-hovered = { fg = "#000000", bg = "#c4c4c4" }
+border  = { fg = "{{rule}}" }
+chord   = { fg = "{{ink}}", bold = true }
+action  = { fg = "{{text}}" }
+hovered = { fg = "{{ink}}", bg = "{{bg4}}" }
 
 # : }}}
 
@@ -193,23 +194,23 @@ hovered = { fg = "#000000", bg = "#c4c4c4" }
 [filetype]
 rules = [
 	# Image
-	{ mime = "**/image/*", fg = "#484848" },
+	{ mime = "**/image/*", fg = "{{soft}}" },
 	# Media
-	{ mime = "**/{audio,video}/*", fg = "#484848" },
+	{ mime = "**/{audio,video}/*", fg = "{{soft}}" },
 	# Archive
-	{ mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#686868" },
+	{ mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "{{muted}}" },
 	# Document
-	{ mime = "**/application/{pdf,doc,rtf}", fg = "#484848" },
+	{ mime = "**/application/{pdf,doc,rtf}", fg = "{{soft}}" },
 	# Virtual file system
-	{ mime = "vfs/{absent,stale}", fg = "#909090" },
+	{ mime = "vfs/{absent,stale}", fg = "{{faint}}" },
 	# Special file
-	{ url = "*", is = "orphan", fg = "#686868", crossed = true },
-	{ url = "*", is = "exec"  , fg = "#000000" },
+	{ url = "*", is = "orphan", fg = "{{muted}}", crossed = true },
+	{ url = "*", is = "exec"  , fg = "{{ink}}" },
 	# Dummy file
-	{ url = "*", is = "dummy", fg = "#909090", crossed = true },
-	{ url = "*/", is = "dummy", fg = "#909090", crossed = true },
+	{ url = "*", is = "dummy", fg = "{{faint}}", crossed = true },
+	{ url = "*/", is = "dummy", fg = "{{faint}}", crossed = true },
 	# Fallback
-	{ url = "*/", fg = "#000000", bold = true }
+	{ url = "*/", fg = "{{ink}}", bold = true }
 ]
 
 # : }}}

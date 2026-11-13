@@ -1,0 +1,36 @@
+// {{title}} for gitui
+// Built with: {{command}}
+//
+// Additions are set in ink, deletions in muted, changes in soft, like the
+// diff colors of the Helix theme. Code views use the {{name}} tmTheme.
+(
+    selected_tab: Some("{{ink}}"),
+    block_title_focused: Some("{{ink}}"),
+
+    selection_bg: Some("{{bg4}}"),
+    selection_fg: Some("{{ink}}"),
+    use_selection_fg: Some(true),
+
+    cmdbar_bg: Some("{{bg1}}"),
+    command_fg: Some("{{text}}"),
+    disabled_fg: Some("{{muted}}"),
+
+    diff_line_add: Some("{{ink}}"),
+    diff_line_delete: Some("{{muted}}"),
+    diff_file_added: Some("{{ink}}"),
+    diff_file_removed: Some("{{muted}}"),
+    diff_file_moved: Some("{{text}}"),
+    diff_file_modified: Some("{{soft}}"),
+
+    commit_hash: Some("{{soft}}"),
+    commit_time: Some("{{muted}}"),
+    commit_author: Some("{{text}}"),
+    branch_fg: Some("{{ink}}"),
+    tag_fg: Some("{{soft}}"),
+
+    danger_fg: Some("{{ink}}"),
+    push_gauge_bg: Some("{{bg4}}"),
+    push_gauge_fg: Some("{{ink}}"),
+
+    syntax: Some("{{name}}"),
+)

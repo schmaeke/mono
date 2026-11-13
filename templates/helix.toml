@@ -1,6 +1,7 @@
-# Mono Dark for Helix
+# {{title}} for Helix
+# Built with: {{command}}
 
-# Code is set in four inks and two styles, never in hue:
+# Code is set in four inks of one hue and two styles:
 #   ink    keywords (bold), functions, types
 #   text   variables, operators, prose
 #   soft   strings, numbers, constants
@@ -139,7 +140,7 @@
 "diff.delta.conflict" = { fg = "ink", modifiers = ["bold"] }
 
 # Diagnostics -----------------------------------------------------------------
-# Severity reads from the underline style first, then from the gray.
+# Severity reads from the underline style first, then from the ink.
 
 "error" = "ink"
 "warning" = "text"
@@ -230,14 +231,14 @@
 "tabstop" = { bg = "bg2", modifiers = ["italic"] }
 
 [palette]
-paper = "#000000"
-bg1 = "#121212"
-bg2 = "#1c1c1c"
-bg3 = "#282828"
-bg4 = "#373737"
-rule = "#484848"
-faint = "#5d5d5d"
-muted = "#838383"
-soft = "#ababab"
-text = "#d4d4d4"
-ink = "#ffffff"
+paper = "{{paper}}"
+bg1 = "{{bg1}}"
+bg2 = "{{bg2}}"
+bg3 = "{{bg3}}"
+bg4 = "{{bg4}}"
+rule = "{{rule}}"
+faint = "{{faint}}"
+muted = "{{muted}}"
+soft = "{{soft}}"
+text = "{{text}}"
+ink = "{{ink}}"
