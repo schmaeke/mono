@@ -66,6 +66,32 @@ else
     echo "zathura: not found, skipped"
 fi
 
+# GTK 3 themes, selected by name; GTK 4 reads ~/.config/gtk-4.0/gtk.css, so
+# link that to the variant you want.
+if command -v gtk-launch >/dev/null 2>&1; then
+    install_theme "GTK 3" "${XDG_DATA_HOME:-$HOME/.local/share}/themes" "$out"/gtk-3.0/*
+else
+    echo "GTK 3: not found, skipped"
+fi
+
+if command -v gtk4-launch >/dev/null 2>&1; then
+    install_theme "GTK 4" "$config/gtk-4.0" "$out"/gtk-4.0/*
+else
+    echo "GTK 4: not found, skipped"
+fi
+
+if command -v qt6ct >/dev/null 2>&1; then
+    install_theme qt6ct "$config/qt6ct/colors" "$out"/qt6ct/*
+else
+    echo "qt6ct: not found, skipped"
+fi
+
+if command -v btm >/dev/null 2>&1; then
+    install_theme bottom "$config/bottom" "$out"/bottom/*
+else
+    echo "bottom: not found, skipped"
+fi
+
 if command -v claude >/dev/null 2>&1; then
     install_theme "Claude Code" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/themes" "$out"/claude-code/*
 else

@@ -1,0 +1,49 @@
+# {{title}} for bottom (btm)
+# Built with: {{command}}
+#
+# Styles only: bottom reads a single config file, so link bottom.toml to this
+# file or copy the tables below into your own. No background colour is set,
+# so the terminal's paper shows through. Graph lines are told apart by
+# lightness: soft, ink, muted and text.
+
+[styles.widgets]
+border_colour = "{{rule}}"
+selected_border_colour = "{{soft}}"
+widget_title = { colour = "{{text}}", bold = true }
+text = "{{text}}"
+selected_text = { colour = "{{ink}}", bg_colour = "{{bg4}}" }
+disabled_text = "{{faint}}"
+thread_text = "{{muted}}"
+
+[styles.tables]
+headers = { colour = "{{muted}}", bold = true }
+
+[styles.graphs]
+graph_colour = "{{rule}}"
+legend_text = "{{text}}"
+
+[styles.cpu]
+all_entry_colour = "{{ink}}"
+avg_entry_colour = "{{soft}}"
+cpu_core_colours = ["{{soft}}", "{{ink}}", "{{muted}}", "{{text}}", "{{ansi5}}", "{{ansi6}}", "{{faint}}", "{{ansi1}}"]
+
+[styles.memory]
+ram_colour = "{{soft}}"
+cache_colour = "{{muted}}"
+swap_colour = "{{ink}}"
+arc_colour = "{{text}}"
+gpu_colours = ["{{soft}}", "{{ink}}", "{{muted}}", "{{text}}"]
+
+[styles.network]
+rx_colour = "{{soft}}"
+tx_colour = "{{ink}}"
+rx_total_colour = "{{soft}}"
+tx_total_colour = "{{ink}}"
+
+[styles.battery]
+high_battery_colour = "{{soft}}"
+medium_battery_colour = "{{text}}"
+low_battery_colour = "{{ink}}"
+
+[styles.temp_graph]
+temp_graph_colour_styles = ["{{soft}}", "{{ink}}", "{{muted}}", "{{text}}", "{{ansi5}}", "{{ansi6}}"]

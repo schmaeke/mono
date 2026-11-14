@@ -1,0 +1,67 @@
+/* {{title}} for GTK 3
+ * Built with: {{command}}
+ *
+ * A theme over adw-gtk3{{dark_suffix}} (package adw-gtk-theme), the GTK 3 port of
+ * libadwaita, which draws every widget and state from the named colours that
+ * libadwaita uses, set here: windows and views on paper, header bars,
+ * sidebars and cards a step up, the accent in the hue. As a theme, not a
+ * gtk.css of the user, it switches in running programs when the theme setting
+ * changes. Install the directory {{name}} to ~/.local/share/themes and select
+ * it as the GTK theme.
+ */
+
+@import url("file:///usr/share/themes/adw-gtk3{{dark_suffix}}/gtk-3.0/gtk.css");
+
+@define-color accent_color {{soft}};
+@define-color accent_bg_color {{soft}};
+@define-color accent_fg_color {{paper}};
+
+@define-color destructive_color {{ink}};
+@define-color destructive_bg_color {{bg3}};
+@define-color destructive_fg_color {{ink}};
+@define-color success_color {{ink}};
+@define-color success_bg_color {{bg3}};
+@define-color success_fg_color {{ink}};
+@define-color warning_color {{ink}};
+@define-color warning_bg_color {{bg3}};
+@define-color warning_fg_color {{ink}};
+@define-color error_color {{ink}};
+@define-color error_bg_color {{bg3}};
+@define-color error_fg_color {{ink}};
+
+@define-color window_bg_color {{paper}};
+@define-color window_fg_color {{text}};
+@define-color view_bg_color {{paper}};
+@define-color view_fg_color {{text}};
+
+@define-color headerbar_bg_color {{bg1}};
+@define-color headerbar_fg_color {{text}};
+@define-color headerbar_border_color {{rule}};
+@define-color headerbar_backdrop_color {{paper}};
+@define-color headerbar_shade_color {{rule}};
+@define-color headerbar_darker_shade_color {{rule}};
+
+@define-color sidebar_bg_color {{bg1}};
+@define-color sidebar_fg_color {{text}};
+@define-color sidebar_backdrop_color {{bg1}};
+@define-color sidebar_shade_color {{rule}};
+@define-color sidebar_border_color {{rule}};
+@define-color secondary_sidebar_bg_color {{bg1}};
+@define-color secondary_sidebar_fg_color {{text}};
+@define-color secondary_sidebar_backdrop_color {{bg1}};
+@define-color secondary_sidebar_shade_color {{rule}};
+@define-color secondary_sidebar_border_color {{rule}};
+
+@define-color card_bg_color {{bg1}};
+@define-color card_fg_color {{text}};
+@define-color card_shade_color {{rule}};
+@define-color dialog_bg_color {{bg1}};
+@define-color dialog_fg_color {{text}};
+@define-color popover_bg_color {{bg2}};
+@define-color popover_fg_color {{text}};
+@define-color popover_shade_color {{rule}};
+@define-color thumbnail_bg_color {{bg1}};
+@define-color thumbnail_fg_color {{text}};
+
+@define-color shade_color {{rule}};
+@define-color scrollbar_outline_color {{paper}};

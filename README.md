@@ -1,7 +1,7 @@
 # Mono
 
-A monochromatic theme for Ghostty, foot, Helix, Yazi, gitui, zathura, mako and Claude Code, in a dark and a light
-variant. Every color is a
+A monochromatic theme for Ghostty, foot, Helix, Yazi, gitui, zathura, mako, bottom, GTK, Qt and Claude Code, in a dark
+and a light variant. Every color is a
 shade of one hue that you choose, so colors differ only in lightness and chroma. Without a hue, Mono is black and white:
 eleven grays, bold and italic.
 
@@ -11,7 +11,7 @@ eleven grays, bold and italic.
 python3 build.py --hue 250
 ```
 
-This writes `mono-dark` and `mono-light` for all eight applications, plus a palette file for scripts and the Linux
+This writes `mono-dark` and `mono-light` for all these applications, plus a palette file for scripts and the Linux
 console colors, to `build/`. The themes always have these names, so a rebuild with other colors replaces the installed
 ones and your configuration stays as it is. Apart from `--image`, the script needs only the Python standard library.
 
@@ -240,6 +240,58 @@ include=~/.config/mako/mono-light
 
 The files hold the sections `[mode=dark]` and `[mode=light]`. Select one with `makoctl mode -s dark`.
 
+**GTK 3**
+
+```sh
+cp -R build/gtk-3.0/* ~/.local/share/themes/
+gsettings set org.gnome.desktop.interface gtk-theme mono-dark
+```
+
+`mono-dark` and `mono-light` are GTK 3 themes over adw-gtk3, the GTK 3 port of libadwaita (on Arch the package
+`adw-gtk-theme`), which draws every widget and state from libadwaita's named colors. The themes set these colors:
+windows and views on the paper, header bars, sidebars and cards on `bg1`, popovers on `bg2`, the accent in `soft` with
+the paper on it, and messages on `bg3` in `ink`. Being themes rather than a `gtk.css`, they switch in running programs
+when the setting changes.
+
+**GTK 4 and libadwaita**
+
+```sh
+cp build/gtk-4.0/* ~/.config/gtk-4.0/
+ln -sf mono-dark.css ~/.config/gtk-4.0/gtk.css
+```
+
+libadwaita ignores themes but reads `~/.config/gtk-4.0/gtk.css`, which sets the same named colors as the GTK 3 themes.
+Programs read it when they start.
+
+**Qt**
+
+```sh
+cp build/qt6ct/* ~/.config/qt6ct/colors/
+```
+
+In `~/.config/qt6ct/qt6ct.conf`, with `QT_QPA_PLATFORMTHEME=qt6ct` in the environment:
+
+```ini
+[Appearance]
+style=Fusion
+custom_palette=true
+color_scheme_path=/home/you/.config/qt6ct/colors/mono-dark.conf
+```
+
+The color scheme sets all 22 roles of Qt's palette for the active, inactive and disabled state, from the same tokens as
+the GTK themes. Qt programs read it when they start.
+
+**bottom**
+
+```sh
+cp build/bottom/* ~/.config/bottom/
+ln -sf mono-dark.toml ~/.config/bottom/bottom.toml
+```
+
+bottom reads a single config file, so link it to the variant, or copy the `[styles]` tables into your own: borders in
+`rule`, the selected widget in `soft`, the selected row in `bg4`, and graph lines told apart by lightness. No background
+color is set, so the terminal's shows through.
+
 **Palette for scripts**
 
 `build/palette/mono-dark` and `mono-light` hold the eleven tokens as `name=rrggbb` lines without `#`, for programs
@@ -268,8 +320,8 @@ To set them from the start of the boot, pass them as the kernel parameters `vt.d
 
 Each application has a template in `templates/`. `{{token}}` stands for a color as `#rrggbb`, `{{token|bare}}` for
 `rrggbb` and `{{token|rgb}}` for `r,g,b`. Besides the tokens there are `ansi0` to `ansi15`, `cube` and `cube_foot` (slots
-16–255 for Ghostty and foot), the Claude Code keys, and `name`, `variant`, `title` and `command`. A new application needs
-a template and a line in `OUTPUTS` in `build.py`.
+16–255 for Ghostty and foot), the Claude Code keys, and `name`, `variant`, `dark_suffix` (`-dark` or nothing), `title`
+and `command`. A new application needs a template and a line in `OUTPUTS` in `build.py`.
 
 ## License
 

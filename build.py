@@ -106,6 +106,10 @@ OUTPUTS = [
     ("zathura", "zathura/{name}"),
     ("palette", "palette/{name}"),
     ("console", "console/{name}"),
+    ("gtk3.css", "gtk-3.0/{name}/gtk-3.0/gtk.css"),
+    ("gtk4.css", "gtk-4.0/{name}.css"),
+    ("qt6ct.conf", "qt6ct/{name}.conf"),
+    ("bottom.toml", "bottom/{name}.toml"),
 ]
 
 
@@ -337,6 +341,7 @@ def values(mode, hue, chroma, tint, command):
     v |= {
         "name": f"mono-{mode}",
         "variant": mode,
+        "dark_suffix": "-dark" if mode == "dark" else "",
         "title": f"Mono {mode.title()}",
         "command": command,
     }
