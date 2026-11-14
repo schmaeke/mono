@@ -101,6 +101,11 @@ OUTPUTS = [
     ("gitui.ron", "gitui/{name}.ron"),
     ("tmtheme.xml", "gitui/{name}.tmTheme"),
     ("claude-code.json", "claude-code/{name}.json"),
+    ("foot.ini", "foot/{name}.ini"),
+    ("mako", "mako/{name}"),
+    ("zathura", "zathura/{name}"),
+    ("palette", "palette/{name}"),
+    ("console", "console/{name}"),
 ]
 
 
@@ -324,7 +329,9 @@ def values(mode, hue, chroma, tint, command):
     p = Palette(mode, hue, chroma, tint)
     v = dict(p.tokens)
     v |= {f"ansi{i}": p.extra(spec) for i, spec in enumerate(ANSI[mode])}
-    v["cube"] = "\n".join(f"palette = {i}={p.cube(i)}" for i in range(16, 256))
+    cube = [(i, p.cube(i)) for i in range(16, 256)]
+    v["cube"] = "\n".join(f"palette = {i}={x}" for i, x in cube)
+    v["cube_foot"] = "\n".join(f"{i}={x[1:]}" for i, x in cube)
     column = 0 if mode == "dark" else 1
     v |= {key: p.extra((spec[column], spec[2])) for key, spec in CLAUDE_CODE.items()}
     v |= {
@@ -336,8 +343,18 @@ def values(mode, hue, chroma, tint, command):
     return v
 
 
+FILTERS = {
+    "bare": lambda x: x[1:],                                              # rrggbb
+    "rgb": lambda x: ",".join(str(int(x[i:i + 2], 16)) for i in (1, 3, 5)),  # r,g,b
+}
+
+
 def render(template, v):
-    return re.sub(r"\{\{(\w+)\}\}", lambda m: v[m.group(1)], template)
+    """Fill in {{key}}, or {{key|filter}} for a colour in another notation."""
+    def fill(m):
+        value = v[m.group(1)]
+        return FILTERS[m.group(2)](value) if m.group(2) else value
+    return re.sub(r"\{\{(\w+)(?:\|(\w+))?\}\}", fill, template)
 
 
 def main():

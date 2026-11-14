@@ -1,0 +1,33 @@
+# {{title}} for zathura
+# Built with: {{command}}
+#
+# Include it from zathurarc. Ctrl-r recolors the page from text on paper.
+
+set default-bg "{{paper}}"
+set default-fg "{{text}}"
+set statusbar-bg "{{bg1}}"
+set statusbar-fg "{{text}}"
+set inputbar-bg "{{paper}}"
+set inputbar-fg "{{ink}}"
+set notification-bg "{{bg2}}"
+set notification-fg "{{text}}"
+set notification-error-bg "{{bg2}}"
+set notification-error-fg "{{ink}}"
+set notification-warning-bg "{{bg2}}"
+set notification-warning-fg "{{ink}}"
+set completion-bg "{{bg2}}"
+set completion-fg "{{text}}"
+set completion-group-bg "{{bg2}}"
+set completion-group-fg "{{muted}}"
+set completion-highlight-bg "{{bg4}}"
+set completion-highlight-fg "{{ink}}"
+set index-bg "{{paper}}"
+set index-fg "{{text}}"
+set index-active-bg "{{bg4}}"
+set index-active-fg "{{ink}}"
+set highlight-color "rgba({{soft|rgb}},0.4)"
+set highlight-active-color "rgba({{ink|rgb}},0.4)"
+set highlight-fg "{{paper}}"
+set recolor-lightcolor "{{paper}}"
+set recolor-darkcolor "{{text}}"
+set recolor-keephue false

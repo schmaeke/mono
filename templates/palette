@@ -1,0 +1,17 @@
+# {{title}} palette
+# Built with: {{command}}
+#
+# The eleven tokens as rrggbb without '#', one name=value per line, for shell
+# scripts (. this file) and programs that read the colours themselves.
+
+paper={{paper|bare}}
+bg1={{bg1|bare}}
+bg2={{bg2|bare}}
+bg3={{bg3|bare}}
+bg4={{bg4|bare}}
+rule={{rule|bare}}
+faint={{faint|bare}}
+muted={{muted|bare}}
+soft={{soft|bare}}
+text={{text|bare}}
+ink={{ink|bare}}

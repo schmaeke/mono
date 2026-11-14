@@ -48,8 +48,31 @@ else
     echo "gitui: not found, skipped"
 fi
 
+if command -v foot >/dev/null 2>&1; then
+    install_theme foot "$config/foot" "$out"/foot/*
+else
+    echo "foot: not found, skipped"
+fi
+
+if command -v mako >/dev/null 2>&1; then
+    install_theme mako "$config/mako" "$out"/mako/*
+else
+    echo "mako: not found, skipped"
+fi
+
+if command -v zathura >/dev/null 2>&1; then
+    install_theme zathura "$config/zathura" "$out"/zathura/*
+else
+    echo "zathura: not found, skipped"
+fi
+
 if command -v claude >/dev/null 2>&1; then
     install_theme "Claude Code" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/themes" "$out"/claude-code/*
 else
     echo "Claude Code: not found, skipped"
 fi
+
+# The palette is for scripts and programs without a theme of their own, the
+# console colors for setvtrgb or the kernel's vt.default_* boot parameters.
+install_theme palette "$config/mono" "$out"/palette/*
+install_theme console "$config/mono/console" "$out"/console/*

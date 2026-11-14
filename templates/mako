@@ -1,0 +1,17 @@
+# {{title}} for mako
+# Built with: {{command}}
+#
+# Include it from the mako config and select it with makoctl mode -s {{variant}}.
+# Notifications sit on bg2 with a rule border; critical ones get an ink border.
+
+[mode={{variant}}]
+background-color={{bg2}}
+text-color={{text}}
+border-color={{rule}}
+progress-color=source {{bg4}}
+
+[mode={{variant}} urgency=low]
+text-color={{muted}}
+
+[mode={{variant}} urgency=critical]
+border-color={{ink}}

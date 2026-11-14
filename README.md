@@ -1,6 +1,7 @@
 # Mono
 
-A monochromatic theme for Ghostty, Helix, Yazi, gitui and Claude Code, in a dark and a light variant. Every color is a
+A monochromatic theme for Ghostty, foot, Helix, Yazi, gitui, zathura, mako and Claude Code, in a dark and a light
+variant. Every color is a
 shade of one hue that you choose, so colors differ only in lightness and chroma. Without a hue, Mono is black and white:
 eleven grays, bold and italic.
 
@@ -10,9 +11,9 @@ eleven grays, bold and italic.
 python3 build.py --hue 250
 ```
 
-This writes `mono-dark` and `mono-light` for all five applications to `build/`. The themes always have these names, so
-a rebuild with other colors replaces the installed ones and your configuration stays as it is. Apart from `--image`, the
-script needs only the Python standard library.
+This writes `mono-dark` and `mono-light` for all eight applications, plus a palette file for scripts and the Linux
+console colors, to `build/`. The themes always have these names, so a rebuild with other colors replaces the installed
+ones and your configuration stays as it is. Apart from `--image`, the script needs only the Python standard library.
 
 | Option     | Default      | Meaning                                                                       |
 | ---------- | ------------ | ----------------------------------------------------------------------------- |
@@ -116,7 +117,8 @@ colors stay in the one hue too.
 ```
 
 The script passes its options to `build.py`, builds the themes in a temporary directory and copies them for each
-application it finds. It skips the rest and does not change any settings. Without options it installs the gray theme.
+application it finds, and the palette to `~/.config/mono`. It skips the rest and does not change any settings. Without
+options it installs the gray theme.
 
 To install by hand, run `build.py` and copy the files from `build/`. To change the colors later, run the script again with
 other options; the configuration below stays the same.
@@ -186,6 +188,85 @@ because Claude Code takes the syntax colors for code blocks and diffs from the t
 bases. With any other base it falls back to a fixed color scheme. Code in Claude Code is therefore in the theme's hue
 only when the terminal uses the matching Mono palette. Added lines in diffs take the chroma of the selection, and
 removed lines stay close to the paper.
+
+**foot**
+
+```sh
+cp build/foot/* ~/.config/foot/
+```
+
+In `~/.config/foot/foot.ini`, before any `[colors-…]` section of your own:
+
+```ini
+[main]
+include=~/.config/foot/mono-dark.ini
+include=~/.config/foot/mono-light.ini
+initial-color-theme=dark
+```
+
+Each file holds one section, `[colors-dark]` or `[colors-light]`. foot starts in `initial-color-theme`, and `SIGUSR1`
+and `SIGUSR2` switch a running foot to dark or light. Slots 16–255 are the same as in the Ghostty theme.
+
+**zathura**
+
+```sh
+cp build/zathura/* ~/.config/zathura/
+```
+
+In `~/.config/zathura/zathurarc`:
+
+```
+include mono-dark
+```
+
+zathura has no light and dark switch. To switch, include a link such as `mono` that points to either file. `Ctrl-r`
+recolors the page from `text` on `paper`.
+
+**mako**
+
+```sh
+cp build/mako/* ~/.config/mako/
+```
+
+At the end of `~/.config/mako/config`:
+
+```ini
+include=~/.config/mako/mono-dark
+include=~/.config/mako/mono-light
+```
+
+The files hold the sections `[mode=dark]` and `[mode=light]`. Select one with `makoctl mode -s dark`.
+
+**Palette for scripts**
+
+`build/palette/mono-dark` and `mono-light` hold the eleven tokens as `name=rrggbb` lines without `#`, for programs
+without a theme of their own: source them in a shell script, or read the lines. `install.sh` copies them to
+`~/.config/mono/`. For example, for a launcher:
+
+```sh
+. ~/.config/mono/mono-dark
+wmenu -N "$paper" -n "$soft" -S "$bg3" -s "$ink"
+```
+
+**Linux console**
+
+`build/console/mono-dark` and `mono-light` hold the 16 console colors as `#rrggbb` lines, in the format of
+`setvtrgb`. Color 0 is the paper, since the console draws its background in color 0; the others are the terminal
+colors. `install.sh` copies them to `~/.config/mono/console/`. To set them until the next boot:
+
+```sh
+sudo setvtrgb ~/.config/mono/console/mono-dark
+```
+
+To set them from the start of the boot, pass them as the kernel parameters `vt.default_red`, `vt.default_grn` and
+`vt.default_blu`, each a list of the 16 values in decimal.
+
+## Templates
+
+Each application has a template in `templates/`. `{{token}}` stands for a color as `#rrggbb`, `{{token|bare}}` for
+`rrggbb` and `{{token|rgb}}` for `r,g,b`. Besides the tokens there are `ansi0` to `ansi15`, `cube` and `cube_foot` (slots
+16–255 for Ghostty and foot), the Claude Code keys, and `name`, `variant`, `title` and `command`. A new application needs
+a template and a line in `OUTPUTS` in `build.py`.
 
 ## License
 
