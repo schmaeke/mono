@@ -143,6 +143,9 @@ cp build/helix/* ~/.config/helix/themes/
 theme = "mono-dark"
 ```
 
+The theme leaves the editor background to the terminal, so a transparent terminal stays transparent in Helix. Use it
+in a terminal with the matching Mono theme, whose background is the paper color.
+
 **Yazi**
 
 ```sh

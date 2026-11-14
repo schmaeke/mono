@@ -157,7 +157,9 @@
 
 # Editor ----------------------------------------------------------------------
 
-"ui.background" = { fg = "text", bg = "paper" }
+# No background of its own: Helix leaves the paper to the terminal, which has the
+# same colour with the Mono terminal themes and may be transparent.
+"ui.background" = { fg = "text" }
 "ui.background.separator" = "rule"
 
 "ui.text" = "text"
@@ -187,7 +189,6 @@
 "ui.highlight" = { bg = "bg2" }
 "ui.highlight.frameline" = { bg = "bg3" }
 
-"ui.gutter" = { bg = "paper" }
 "ui.gutter.selected" = { bg = "bg1" }
 "ui.linenr" = "faint"
 "ui.linenr.selected" = "ink"
