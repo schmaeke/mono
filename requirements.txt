@@ -1,0 +1,3 @@
+# Only needed for build.py --image. Everything else uses the standard library.
+pillow
+pillow-heif

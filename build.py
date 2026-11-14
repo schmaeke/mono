@@ -4,6 +4,7 @@
     python3 build.py                                    # gray, black and white
     python3 build.py --hue 250                          # blue
     python3 build.py --hue 250 --chroma 0.6 --tint 0    # weaker blue on pure black and white
+    python3 build.py --image wallpaper.jpg              # all three numbers from an image
 
 The themes are always called mono-dark and mono-light, so a rebuild with other
 colours replaces the installed ones without any change to the configuration.
@@ -18,7 +19,8 @@ theme. A tinted paper scales all log-contrasts by one factor, so the steps
 between colours stay even. Hue and chroma come on top, with the chroma held
 inside the sRGB gamut.
 
-Only the Python standard library is needed.
+Only the Python standard library is needed, except for --image, which reads
+the image with Pillow.
 """
 
 import argparse
@@ -48,6 +50,9 @@ CHROMA = [0.018, 0.024, 0.028, 0.036, 0.055, 0.040, 0.045, 0.050, 0.090, 0.014, 
 GAMUT_FRACTION = 0.9                          # keep clear of the sRGB edge
 PAPER_LIFT = {"dark": 0.18, "light": -0.025}  # OKLab L shift of the paper at tint = 1
 INK_HEADROOM = 0.06                           # contrast given up at tint = 1 so ink can carry hue
+
+COLOURFUL = 0.02          # image pixels below this chroma carry no hue
+CHROMA_REFERENCE = 0.075  # mean chroma of an image that gives chroma = 1
 
 # Colours beyond the tokens are a gray of the gray theme plus the token whose
 # chroma they take. A bare token name stands for that token.
@@ -221,7 +226,7 @@ class Palette:
         return self.shade(gray, self.chroma[token])
 
     def cube(self, index):
-        """Slot 16-255 of the xterm palette: the colour of equal lightness, more chromatic the more colourful the slot."""
+        """Slot 16-255 of the xterm palette: the colour of equal lightness, the more chromatic the more colourful."""
         if index < 232:
             levels = (0, 95, 135, 175, 215, 255)
             i = index - 16
@@ -232,6 +237,85 @@ class Palette:
         weight = min(1.0, math.hypot(a, b) / 0.16)
         chroma = (1 - weight) * self.chroma["bg1"] + weight * self.chroma["soft"]
         return self.shade(linear_to_hex([L ** 3] * 3), chroma)
+
+
+# Image ----------------------------------------------------------------------
+
+def load_image(path):
+    """The sRGB pixels of an image, scaled down to at most 128 pixels a side."""
+    try:
+        from PIL import Image
+    except ImportError:
+        sys.exit("Reading an image needs the Pillow package (https://pypi.org/project/pillow/).")
+    try:
+        from pillow_heif import register_heif_opener
+        register_heif_opener()
+        heif = True
+    except ImportError:
+        heif = False
+    try:
+        with Image.open(path) as image:
+            image.draft("RGB", (256, 256))
+            image = image.convert("RGB")
+            image.thumbnail((128, 128))
+            data = image.tobytes()
+    except OSError as error:
+        if not heif and path.suffix.lower() in (".heic", ".heif"):
+            sys.exit(f"Reading {path.name} needs the pillow-heif package (https://pypi.org/project/pillow-heif/).")
+        sys.exit(f"Cannot read {path}: {error}")
+    return [tuple(data[i:i + 3]) for i in range(0, len(data), 3)]
+
+
+def hue_distance(h1, h2):
+    return abs((h1 - h2 + 180) % 360 - 180)
+
+
+def analyse(pixels):
+    """Hue, chroma and tint for an image, plus its strongest hues with their share of the colour.
+
+    The hue is the strongest peak of a histogram of the colourful pixels'
+    hues, each pixel weighted by its chroma. Averaging all hues instead would
+    turn an image of red and blue into magenta. The chroma follows the mean
+    chroma of the image, and the tint the lightness of its darkest parts, so
+    that an image with deep black shadows keeps the paper black.
+    """
+    lab = [oklab(tuple(srgb_to_linear(c / 255) for c in p)) for p in pixels]
+    colourful = []
+    bins = [0.0] * 72
+    for _, a, b in lab:
+        C = math.hypot(a, b)
+        if C >= COLOURFUL:
+            h = math.degrees(math.atan2(b, a)) % 360
+            colourful.append((C, h, a, b))
+            bins[int(h // 5)] += C
+    total = sum(bins)
+
+    kernel = (1, 2, 3, 4, 3, 2, 1)
+    smooth = [sum(bins[(i + j - 3) % 72] * k for j, k in enumerate(kernel)) for i in range(72)]
+    peaks = [i for i in range(72) if smooth[i] > 0 and smooth[i - 1] <= smooth[i] >= smooth[(i + 1) % 72]]
+    hues = []
+    for i in sorted(peaks, key=lambda i: -smooth[i]):
+        centre = i * 5 + 2.5
+        if any(hue_distance(centre, h) < 30 for h, _ in hues):
+            continue
+        # Summing (a, b) averages the hues near the peak, weighted by chroma.
+        near = [(C, a, b) for C, h, a, b in colourful if hue_distance(h, centre) <= 15]
+        hue = math.degrees(math.atan2(sum(b for _, _, b in near), sum(a for _, a, _ in near))) % 360
+        share = sum(C for C, _, _ in near) / total
+        if hues and share < 0.02:
+            break
+        hues.append((hue, share))
+        if len(hues) == 3:
+            break
+
+    mean_chroma = sum(math.hypot(a, b) for _, a, b in lab) / len(lab)
+    shadow = sorted(L for L, _, _ in lab)[len(lab) // 20]
+    return {
+        "hue": round(hues[0][0]) % 360 if hues else None,
+        "chroma": round(min(2.0, mean_chroma / CHROMA_REFERENCE), 2) if hues else 0.0,
+        "tint": round(min(1.0, shadow / PAPER_LIFT["dark"]), 2),
+        "hues": hues,
+    }
 
 
 # Build ----------------------------------------------------------------------
@@ -261,8 +345,18 @@ def main():
     parser.add_argument("--hue", type=float, help="OKLCH hue in degrees; leave out for the gray theme")
     parser.add_argument("--chroma", type=float, help="colour strength, 0 to 2 (default 1 with a hue, 0 without)")
     parser.add_argument("--tint", type=float, help="paper lift, 0 to 1.5 (default 1 with a hue, 0 without)")
+    parser.add_argument("--image", type=Path, help="take hue, chroma and tint from an image; options above override")
     parser.add_argument("--out", type=Path, default=ROOT / "build", help="output directory (default: build)")
     args = parser.parse_args()
+
+    if args.image is not None:
+        found = analyse(load_image(args.image))
+        hues = ", ".join(f"{h:.0f} ({share:.0%})" for h, share in found["hues"]) or "none"
+        print(f"{args.image.name}: hue {found['hue']}, chroma {found['chroma']:g}, tint {found['tint']:g}"
+              f" (strongest hues: {hues})")
+        for key in ("hue", "chroma", "tint"):
+            if getattr(args, key) is None:
+                setattr(args, key, found[key])
 
     gray = args.hue is None
     hue = 0.0 if gray else args.hue % 360

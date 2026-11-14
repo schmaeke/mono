@@ -11,14 +11,15 @@ python3 build.py --hue 250
 ```
 
 This writes `mono-dark` and `mono-light` for all five applications to `build/`. The themes always have these names, so
-a rebuild with other colors replaces the installed ones and your configuration stays as it is. The script needs only the
-Python standard library.
+a rebuild with other colors replaces the installed ones and your configuration stays as it is. Apart from `--image`, the
+script needs only the Python standard library.
 
 | Option     | Default      | Meaning                                                                       |
 | ---------- | ------------ | ----------------------------------------------------------------------------- |
 | `--hue`    | none, gray   | OKLCH hue in degrees                                                          |
 | `--chroma` | 1            | Color strength, from 0 (gray) to 2                                            |
 | `--tint`   | 1            | Paper lift, from 0 (pure black or white) to 1.5                               |
+| `--image`  | none         | Take hue, chroma and tint from an image (see below)                           |
 | `--out`    | `build`      | Output directory                                                              |
 
 Without `--hue`, the script builds the gray theme, with chroma and tint 0. `--tint` also works without a hue and gives
@@ -26,6 +27,35 @@ a dark gray or off-white paper.
 
 Some hues to start from: red 25, amber 70, olive 105, green 145, teal 190, blue 250, violet 290, rose 340. Yellow hues
 turn olive in the light variant, because sRGB has no dark, saturated yellow.
+
+### From a wallpaper
+
+```sh
+python3 build.py --image ~/Pictures/wallpaper.jpg
+```
+
+`--image` takes all three numbers from an image and prints them, together with the image's strongest hues:
+
+- The hue is the strongest peak among the hues of the image's colorful pixels, each weighted by its chroma. An image of
+  red and blue gives red or blue, whichever covers more, and never the magenta between them.
+- The chroma follows the image's mean chroma: a gray photo gives 0, a hazy landscape about 0.3, a vivid graphic up to 2.
+- The tint follows the lightness of the darkest 5 % of the image, up to 1. An image with deep black shadows keeps the
+  paper black.
+
+Options given next to `--image` override what it finds: `--image wallpaper.jpg --hue 30` keeps the image's chroma and
+tint. The `Built with` line in each theme file records the numbers, not the image, so the build can be repeated without
+it.
+
+Reading the image needs the [Pillow](https://pypi.org/project/pillow/) package. It reads JPEG, PNG, WebP, TIFF and most
+other formats; HEIC images, which macOS uses for its wallpapers, also need
+[pillow-heif](https://pypi.org/project/pillow-heif/). Everything else needs only the standard library. To keep both out
+of the system Python, install them into a virtual environment in the repository, which `install.sh` then uses:
+
+```sh
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+./install.sh --image ~/Pictures/wallpaper.heic
+```
 
 ## Palette
 

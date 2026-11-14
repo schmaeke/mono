@@ -6,9 +6,13 @@ set -eu
 src=$(cd "$(dirname "$0")" && pwd)
 config=${XDG_CONFIG_HOME:-$HOME/.config}
 
+# A virtual environment next to the script may provide Pillow for --image.
+python=python3
+if [ -x "$src/.venv/bin/python3" ]; then python=$src/.venv/bin/python3; fi
+
 out=$(mktemp -d)
 trap 'rm -rf "$out"' EXIT
-python3 "$src/build.py" --out "$out" "$@"
+"$python" "$src/build.py" --out "$out" "$@"
 
 install_theme() { # name, target directory, files or directories...
     name=$1 dir=$2
