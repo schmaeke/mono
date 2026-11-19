@@ -92,6 +92,12 @@ else
     echo "bottom: not found, skipped"
 fi
 
+if command -v aerc >/dev/null 2>&1; then
+    install_theme aerc "$config/aerc/stylesets" "$out"/aerc/*
+else
+    echo "aerc: not found, skipped"
+fi
+
 if command -v claude >/dev/null 2>&1; then
     install_theme "Claude Code" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/themes" "$out"/claude-code/*
 else

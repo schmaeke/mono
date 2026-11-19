@@ -110,6 +110,7 @@ OUTPUTS = [
     ("gtk4.css", "gtk-4.0/{name}.css"),
     ("qt6ct.conf", "qt6ct/{name}.conf"),
     ("bottom.toml", "bottom/{name}.toml"),
+    ("aerc", "aerc/{name}"),
 ]
 
 

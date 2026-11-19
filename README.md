@@ -1,6 +1,6 @@
 # Mono
 
-A monochromatic theme for Ghostty, foot, Helix, Yazi, gitui, zathura, mako, bottom, GTK, Qt and Claude Code, in a dark
+A monochromatic theme for Ghostty, foot, Helix, Yazi, gitui, zathura, mako, bottom, aerc, GTK, Qt and Claude Code, in a dark
 and a light variant. Every color is a
 shade of one hue that you choose, so colors differ only in lightness and chroma. Without a hue, Mono is black and white:
 eleven grays, bold and italic.
@@ -291,6 +291,18 @@ ln -sf mono-dark.toml ~/.config/bottom/bottom.toml
 bottom reads a single config file, so link it to the variant, or copy the `[styles]` tables into your own: borders in
 `rule`, the selected widget in `soft`, the selected row in `bg4`, and graph lines told apart by lightness. No background
 color is set, so the terminal's shows through.
+
+**aerc**
+
+```sh
+mkdir -p ~/.config/aerc/stylesets
+cp build/aerc/* ~/.config/aerc/stylesets/
+```
+
+Set `styleset-name=mono-dark` (or `mono-light`) under `[ui]` in `aerc.conf`. The styleset is flat like the Yazi flavor:
+no background colors, the selection underlined in `ink`, unread mail in `ink` and bold, read mail `muted`, flagged and
+marked mail `soft`. Its `[viewer]` section colors mail through aerc's `colorize` filter: links and quotes in `soft`,
+deeper quotes fading to `faint`.
 
 **Palette for scripts**
 
