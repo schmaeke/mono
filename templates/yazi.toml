@@ -4,6 +4,10 @@
 # Names are set in two inks: directories in ink (bold), files in text.
 # Media and documents are soft, archives muted. Icons carry no color of
 # their own and take the color of the name next to them.
+#
+# Flat, without blocks of color or rounded caps: the hovered file, the active
+# tab and the selection in lists are underlined in ink, and the popups have a
+# border in the hue.
 
 # : Manager {{{
 
@@ -24,9 +28,9 @@ marker_marked   = { fg = "{{text}}", bg = "{{text}}" }
 marker_selected = { fg = "{{ink}}", bg = "{{ink}}" }
 
 # Count
-count_copied   = { fg = "{{paper}}", bg = "{{soft}}" }
-count_cut      = { fg = "{{paper}}", bg = "{{muted}}" }
-count_selected = { fg = "{{paper}}", bg = "{{ink}}" }
+count_copied   = { fg = "{{soft}}", bold = true }
+count_cut      = { fg = "{{muted}}", bold = true }
+count_selected = { fg = "{{ink}}", bold = true }
 
 # Border
 border_style = { fg = "{{rule}}" }
@@ -37,8 +41,12 @@ border_style = { fg = "{{rule}}" }
 # : Tabs {{{
 
 [tabs]
-active   = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
-inactive = { fg = "{{muted}}", bg = "{{bg1}}" }
+active   = { fg = "{{ink}}", bold = true, underline = true }
+inactive = { fg = "{{muted}}" }
+
+# Separator
+sep_inner = { open = " ", close = " " }
+sep_outer = { open = "", close = "" }
 
 # : }}}
 
@@ -46,16 +54,16 @@ inactive = { fg = "{{muted}}", bg = "{{bg1}}" }
 # : Mode {{{
 
 [mode]
-normal_main = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
-normal_alt  = { fg = "{{text}}", bg = "{{bg2}}" }
+normal_main = { fg = "{{ink}}", bold = true }
+normal_alt  = { fg = "{{muted}}" }
 
 # Select mode
-select_main = { fg = "{{paper}}", bg = "{{soft}}", bold = true }
-select_alt  = { fg = "{{soft}}", bg = "{{bg2}}" }
+select_main = { fg = "{{soft}}", bold = true }
+select_alt  = { fg = "{{soft}}" }
 
 # Unset mode
-unset_main = { fg = "{{paper}}", bg = "{{muted}}", bold = true }
-unset_alt  = { fg = "{{muted}}", bg = "{{bg2}}" }
+unset_main = { fg = "{{muted}}", bold = true }
+unset_alt  = { fg = "{{muted}}" }
 
 # : }}}
 
@@ -63,9 +71,10 @@ unset_alt  = { fg = "{{muted}}", bg = "{{bg2}}" }
 # : Indicator of hovered file {{{
 
 [indicator]
-parent  = { fg = "{{ink}}", bg = "{{bg3}}" }
-current = { fg = "{{paper}}", bg = "{{ink}}" }
+parent  = { fg = "{{ink}}", bold = true }
+current = { fg = "{{ink}}", bold = true, underline = true }
 preview = { underline = true }
+padding = { open = " ", close = " " }
 
 # : }}}
 
@@ -73,6 +82,9 @@ preview = { underline = true }
 # : Status bar {{{
 
 [status]
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
 # Permissions
 perm_sep   = { fg = "{{faint}}" }
 perm_type  = { fg = "{{ink}}" }
@@ -91,7 +103,7 @@ progress_error  = { fg = "{{ink}}", bg = "{{bg4}}" }
 # : Which {{{
 
 [which]
-border          = { fg = "{{rule}}" }
+border          = { fg = "{{soft}}" }
 mask            = { bg = "{{bg2}}" }
 cand            = { fg = "{{ink}}", bold = true }
 rest            = { fg = "{{muted}}" }
@@ -104,11 +116,11 @@ separator_style = { fg = "{{faint}}" }
 # : Confirmation {{{
 
 [confirm]
-border  = { fg = "{{rule}}" }
+border  = { fg = "{{soft}}" }
 title   = { fg = "{{ink}}", bold = true }
 body    = { fg = "{{text}}" }
 list    = { fg = "{{soft}}" }
-btn_yes = { fg = "{{paper}}", bg = "{{ink}}", bold = true }
+btn_yes = { fg = "{{ink}}", bold = true, underline = true }
 btn_no  = { fg = "{{text}}" }
 
 # : }}}
@@ -117,12 +129,12 @@ btn_no  = { fg = "{{text}}" }
 # : Spotter {{{
 
 [spot]
-border = { fg = "{{rule}}" }
+border = { fg = "{{soft}}" }
 title  = { fg = "{{ink}}", bold = true }
 
 # Table
 tbl_col  = { fg = "{{muted}}" }
-tbl_cell = { fg = "{{ink}}", bg = "{{bg4}}" }
+tbl_cell = { fg = "{{ink}}", bold = true, underline = true }
 
 # : }}}
 
@@ -140,8 +152,8 @@ title_error = { fg = "{{ink}}", bold = true }
 # : Picker {{{
 
 [pick]
-border   = { fg = "{{rule}}" }
-active   = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
+border   = { fg = "{{soft}}" }
+active   = { fg = "{{ink}}", bold = true, underline = true }
 inactive = { fg = "{{text}}" }
 
 # : }}}
@@ -150,7 +162,7 @@ inactive = { fg = "{{text}}" }
 # : Input {{{
 
 [input]
-border   = { fg = "{{rule}}" }
+border   = { fg = "{{soft}}" }
 title    = { fg = "{{ink}}", bold = true }
 value    = { fg = "{{text}}" }
 selected = { bg = "{{bg4}}" }
@@ -161,8 +173,8 @@ selected = { bg = "{{bg4}}" }
 # : Completion {{{
 
 [cmp]
-border   = { fg = "{{rule}}" }
-active   = { fg = "{{ink}}", bg = "{{bg4}}" }
+border   = { fg = "{{soft}}" }
+active   = { fg = "{{ink}}", bold = true, underline = true }
 inactive = { fg = "{{text}}" }
 
 # : }}}
@@ -171,9 +183,9 @@ inactive = { fg = "{{text}}" }
 # : Task manager {{{
 
 [tasks]
-border  = { fg = "{{rule}}" }
+border  = { fg = "{{soft}}" }
 title   = { fg = "{{ink}}", bold = true }
-hovered = { fg = "{{ink}}", bg = "{{bg4}}" }
+hovered = { fg = "{{ink}}", bold = true, underline = true }
 
 # : }}}
 
@@ -181,10 +193,10 @@ hovered = { fg = "{{ink}}", bg = "{{bg4}}" }
 # : Help menu {{{
 
 [help]
-border  = { fg = "{{rule}}" }
+border  = { fg = "{{soft}}" }
 chord   = { fg = "{{ink}}", bold = true }
 action  = { fg = "{{text}}" }
-hovered = { fg = "{{ink}}", bg = "{{bg4}}" }
+hovered = { fg = "{{ink}}", bold = true, underline = true }
 
 # : }}}
 
