@@ -161,7 +161,8 @@ light = "mono-light"
 ```
 
 Yazi picks the flavor that matches the terminal's background. Icons have no color of their own and take the color of the
-file name: directories in bold `ink`, files in `text`, media and documents in `soft`, archives in `muted`. Code previews
+file name: directories in bold `ink`, files in `text`, media and documents in `soft`, archives in `muted`. The hovered
+file is a row in `bg4` (`bg3` in the parent and preview columns), as is the selection in the popups' lists. Code previews
 use the flavor's `tmtheme.xml`, which sets code in the same four inks as the Helix theme.
 
 **gitui**
@@ -299,8 +300,8 @@ mkdir -p ~/.config/aerc/stylesets
 cp build/aerc/* ~/.config/aerc/stylesets/
 ```
 
-Set `styleset-name=mono-dark` (or `mono-light`) under `[ui]` in `aerc.conf`. The styleset is flat like the Yazi flavor:
-no background colors, the selection underlined in `ink`, unread mail in `ink` and bold, read mail `muted`, flagged and
+Set `styleset-name=mono-dark` (or `mono-light`) under `[ui]` in `aerc.conf`. The styleset is flat: no background
+colors, the selection underlined in `ink`, unread mail in `ink` and bold, read mail `muted`, flagged and
 marked mail `soft`. Its `[viewer]` section colors mail through aerc's `colorize` filter: links and quotes in `soft`,
 deeper quotes fading to `faint`.
 

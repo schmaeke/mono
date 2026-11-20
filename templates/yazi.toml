@@ -5,8 +5,9 @@
 # Media and documents are soft, archives muted. Icons carry no color of
 # their own and take the color of the name next to them.
 #
-# Flat, without blocks of color or rounded caps: the hovered file, the active
-# tab and the selection in lists are underlined in ink, and the popups have a
+# Flat, without rounded caps: the hovered file and the selection in lists are
+# rows in bg4 with the name in ink (bg3 in the parent and preview columns),
+# the active tab and button are underlined in ink, and the popups have a
 # border in the hue.
 
 # : Manager {{{
@@ -71,9 +72,9 @@ unset_alt  = { fg = "{{muted}}" }
 # : Indicator of hovered file {{{
 
 [indicator]
-parent  = { fg = "{{ink}}", bold = true }
-current = { fg = "{{ink}}", bold = true, underline = true }
-preview = { underline = true }
+parent  = { fg = "{{ink}}", bg = "{{bg3}}", bold = true }
+current = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
+preview = { fg = "{{ink}}", bg = "{{bg3}}" }
 padding = { open = " ", close = " " }
 
 # : }}}
@@ -134,7 +135,7 @@ title  = { fg = "{{ink}}", bold = true }
 
 # Table
 tbl_col  = { fg = "{{muted}}" }
-tbl_cell = { fg = "{{ink}}", bold = true, underline = true }
+tbl_cell = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
 
 # : }}}
 
@@ -153,7 +154,7 @@ title_error = { fg = "{{ink}}", bold = true }
 
 [pick]
 border   = { fg = "{{soft}}" }
-active   = { fg = "{{ink}}", bold = true, underline = true }
+active   = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
 inactive = { fg = "{{text}}" }
 
 # : }}}
@@ -174,7 +175,7 @@ selected = { bg = "{{bg4}}" }
 
 [cmp]
 border   = { fg = "{{soft}}" }
-active   = { fg = "{{ink}}", bold = true, underline = true }
+active   = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
 inactive = { fg = "{{text}}" }
 
 # : }}}
@@ -185,7 +186,7 @@ inactive = { fg = "{{text}}" }
 [tasks]
 border  = { fg = "{{soft}}" }
 title   = { fg = "{{ink}}", bold = true }
-hovered = { fg = "{{ink}}", bold = true, underline = true }
+hovered = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
 
 # : }}}
 
@@ -196,7 +197,7 @@ hovered = { fg = "{{ink}}", bold = true, underline = true }
 border  = { fg = "{{soft}}" }
 chord   = { fg = "{{ink}}", bold = true }
 action  = { fg = "{{text}}" }
-hovered = { fg = "{{ink}}", bold = true, underline = true }
+hovered = { fg = "{{ink}}", bg = "{{bg4}}", bold = true }
 
 # : }}}
 
